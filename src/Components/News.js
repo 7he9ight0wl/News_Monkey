@@ -41,7 +41,7 @@ const News = (props)=>{debugger
         setPage(page+1) 
         let data = await fetch(url);
         let parsedData = await data.json()
-        setArticles(articles.concat(parsedData.articles))
+        setArticles(articles?.concat(parsedData.articles))
         setTotalResults(parsedData.totalResults)
       };
  
@@ -50,15 +50,15 @@ const News = (props)=>{debugger
                 <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>NewsMonkey - Top {capitalizeFirstLetter(props.category)} Headlines</h1>
                 {loading && <Spinner />}
                 <InfiniteScroll
-                    dataLength={articles.length}
+                    dataLength={articles?.length}
                     next={fetchMoreData}
-                    hasMore={articles.length !== totalResults}
+                    hasMore={articles?.length !== totalResults}
                     loader={<Spinner/>}
                 > 
                     <div className="container">
                          
                     <div className="row">
-                        {articles.map((element) => {
+                        {articles?.map((element) => {
                             return <div className="col-md-4" key={element.url}>
                                 <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
                             </div>
@@ -85,3 +85,10 @@ News.propTypes = {
 }
 
 export default News
+// if (yourObject && yourObject.length) {
+//     // Access the 'length' property if 'yourObject' exists and has a 'length' property
+//     // Your code here
+//   } else {
+//     console.error("Object 'yourObject' is undefined or has no 'length' property.");
+//   }
+  
